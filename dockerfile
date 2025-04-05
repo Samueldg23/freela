@@ -11,11 +11,9 @@ RUN mvn clean package -DskipTests
 
 FROM openjdk:17-jdk-slim
 
-RUN mkdir data
+RUN mkdir -p data
 EXPOSE 8080
 
 COPY --from=build /app/target/*.jar app.jar
-
-ENV SPRING_PROFILES_ACTIVE=prod
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
